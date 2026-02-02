@@ -1,0 +1,291 @@
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #f9f4ef;
+}
+
+.header {
+    background: #f3e9e1;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    color: #5a3e36;
+}
+
+.header select {
+    padding: 6px;
+    font-size: 14px;
+}
+
+.record {
+    background: #fff;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.images img {
+    width: 300px;
+    border-radius: 8px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+button {
+    background-color: #a57c5f;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8e634c;
+}
+.images {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.maceta {
+  flex: 1;
+  text-align: center;
+}
+
+.maceta img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 10px 0;
+}
+
+.drive-img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+
+.no-img {
+    font-style: italic;
+    color: #888;
+}
+
+.bitacora {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #5a462d;
+    border: 1px solid #e0d6c8;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.bitacora h1 {
+    text-align: center;
+    color: #4f6b4a;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    text-align: center;
+    font-style: italic;
+    color: #7a6a5f;
+    margin-bottom: 25px;
+}
+
+.bloque {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #d8cfc4;
+}
+
+.bloque h2 {
+    color: #5a7c5a;
+    margin-bottom: 15px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #4a4036;
+}
+
+input, select, textarea {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #c8bfb3;
+    font-family: Georgia, serif;
+    background-color: #fdfbf7;
+}
+
+input[type="file"] {
+    border: none;
+    background: transparent;
+}
+
+.maceta {
+    background: #9c7a4c;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e0d6c8;
+}
+
+.maceta h3 {
+    margin-top: 0;
+    color: #5f7f5f;
+}
+
+.acciones {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 30px;
+}
+.preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.preview img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #c9d6c3;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+
+.cloud-img {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.mi-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mi-input {
+    font-size: 16px;
+    padding: 5px;
+}
+
+
+
+/* Contenedor principal de cada registro */
+.registro {
+    background-color: #f3f7e37c; /* verde suave */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Encabezado de fecha */
+.registro .fecha {
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+/* Contenedor de las macetas */
+.macetas {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* Cada maceta */
+.maceta {
+    flex: 1;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.maceta:last-child {
+    margin-right: 0;
+}
+
+/* Título de la maceta */
+.maceta h3 {
+    font-size: 16px;
+    color: #1b5e20;
+    margin-bottom: 10px;
+}
+
+/* Imagen de la maceta */
+.maceta img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Parámetros */
+.parametros {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #111111;
+}
+
+/* Íconos y texto */
+.parametros span {
+    margin-right: 8px;
+}
+
+

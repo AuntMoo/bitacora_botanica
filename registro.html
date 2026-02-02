@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bitácora Botánica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="bitacora">
+        <form id="bitacoraForm">
+
+            <h1>📖 Registro diario de observación</h1>
+            <p class="subtitulo">Proyecto de investigación botánica</p>
+
+            <!-- DATOS AMBIENTALES -->
+            <section class="bloque">
+                <h2>🌤 Condiciones ambientales</h2>
+                <div class="grid-3">
+                    <label class="mi-input">
+                        🌡 Temperatura (°C)
+                        <input type="number" id="temperatura" >
+                    </label>
+
+                    <label class="mi-input">
+                        💧 Humedad (%)
+                        <input type="number" id="humedad" >
+                    </label>
+
+                    <label class="mi-input">
+                        🚿 Litros de agua en balde
+                        <input type="number" id="agua_balde">
+                    </label>
+                </div>
+            </section>
+
+            <!-- REGISTRO FOTOGRÁFICO -->
+            <section class="bloque">
+                <h2>📸 Registro fotográfico</h2>
+
+                <div class="image-grid">
+                    <div class="maceta">
+                        <h2>🌿 Maceta A</h2>
+                        <input type="file" id="macetaA" accept="image/*" multiple>
+                        <br><small>Hasta 3 imágenes</small>
+                        <div class="preview" id="previewA"></div>
+                    </div>
+
+                    <div class="maceta">
+                        <h2>🌿 Maceta B</h2>
+                        <input type="file" id="macetaB" accept="image/*" multiple>
+                        <br><small>Hasta 3 imágenes</small>
+                        <div class="preview" id="previewB"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OBSERVACIONES -->
+            <section class="bloque">
+                <h2>🧪 Observaciones</h2>
+                <div class="grid-2">
+                    <label class="mi-input">
+                        💨 Deshumidificador 
+                        <select id="deshumidificador" class="mi-input">
+                            <option value="">Seleccionar</option>
+                            <option>Bajo</option>
+                            <option>Medio</option>
+                            <option>Medio lleno</option>
+                            <option>Lleno</option>
+                        </select>
+                    </label>
+
+                    <label class="mi-input">
+                        📝 Comentarios
+                        <textarea id="comentarios" rows="5" class="mi-input"
+                            placeholder="Notas del investigador, observaciones, cambios visibles..."></textarea>
+                    </label>
+                </div>
+            </section>
+            <div class="acciones">
+                <a href="index.html" style=" background-color: #3c753e;
+                        color: white;
+                        padding: 10px 15px;
+                        border-radius: 5px;
+                        text-decoration: none;
+                        font-weight: bold;
+                    ">📥 Ver Registros</a>
+                <button type="submit" form="miForm" style="
+                        background-color: #8a7328;
+                        color: white;
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        ">📥 Guardar registro</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="registro.js"></script>
+</body>
+
+</html>
