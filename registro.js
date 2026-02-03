@@ -4,29 +4,24 @@ console.log("✅ registro.js cargado correctamente");
 // Función para mostrar preview de imágenes
 // ==============================
 function previewImages(input, containerId, max = 3) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
 
-    Array.from(input.files).slice(0, max).forEach(file => {
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        img.style.width = "100px";
-        img.style.margin = "6px";
-        img.style.borderRadius = "10px";
-        container.appendChild(img);
-    });
+  Array.from(input.files).slice(0, max).forEach(file => {
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    img.style.width = "100px";
+    img.style.margin = "6px";
+    img.style.borderRadius = "10px";
+    container.appendChild(img);
+  });
 }
 
 // ==============================
 // Listeners para previews
 // ==============================
-document.getElementById("macetaA").addEventListener("change", e => {
-    previewImages(e.target, "previewA");
-});
-
-document.getElementById("macetaB").addEventListener("change", e => {
-    previewImages(e.target, "previewB");
-});
+document.getElementById("macetaA").addEventListener("change", e => previewImages(e.target, "previewA"));
+document.getElementById("macetaB").addEventListener("change", e => previewImages(e.target, "previewB"));
 
 // ==============================
 // Configuración Cloudinary
@@ -35,24 +30,22 @@ const CLOUD_NAME = "dyqlyzbrm";
 const UPLOAD_PRESET = "bitacora_botanica";
 
 async function uploadToCloudinary(file, folder) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
-    formData.append("folder", folder);
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", UPLOAD_PRESET);
+  formData.append("folder", folder);
 
-    const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        { method: "POST", body: formData }
-    );
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+    method: "POST",
+    body: formData
+  });
 
-    const data = await res.json();
-    return data.secure_url;
+  const data = await res.json();
+  return data.secure_url;
 }
 
 // ==============================
 // Submit del formulario
-// ==============================
-// ENVÍO DEL FORMULARIO
 // ==============================
 document.getElementById("bitacoraForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -77,7 +70,7 @@ document.getElementById("bitacoraForm").addEventListener("submit", async e => {
   const comentarios = document.getElementById("comentarios").value;
 
   // ==============================
-  // Subir imágenes
+  // Subir imágenes a Cloudinary
   // ==============================
   const urlsA = [];
   const urlsB = [];
@@ -86,6 +79,7 @@ document.getElementById("bitacoraForm").addEventListener("submit", async e => {
     for (const file of filesB) urlsB.push(await uploadToCloudinary(file, "macetas/B"));
   } catch (err) {
     alert("❌ Error al subir imágenes. Revisa la consola.");
+    console.error(err);
     return;
   }
 
@@ -93,9 +87,10 @@ document.getElementById("bitacoraForm").addEventListener("submit", async e => {
   console.log("🌿 Maceta B URLs:", urlsB);
 
   // ==============================
-  // Enviar a Google Sheets
+  // Enviar datos a Google Sheets
   // ==============================
-  const endpoint = "https://script.google.com/macros/s/AKfycbyhUm2Vx5ec1-P19sFlMzWiPmujDoqBQPQ5Uh9cGp6_5It3NofO1AN8cV2IUx3OQv1cvQ/exec"; // reemplaza con tu Web App URL
+  const endpoint = "https://script.google.com/macros/s/AKfycbyhUm2Vx5ec1-P19sFlMzWiPmujDoqBQPQ5Uh9cGp6_5It3NofO1AN8cV2IUx3OQv1cvQ/exec";
+
   const registro = {
     temperatura,
     humedad,
@@ -113,8 +108,6 @@ document.getElementById("bitacoraForm").addEventListener("submit", async e => {
       body: JSON.stringify(registro)
     });
 
-    console.log("📡 Respuesta raw del fetch:", res);
-
     const data = await res.json();
     console.log("📄 JSON recibido del Apps Script:", data);
 
@@ -126,11 +119,9 @@ document.getElementById("bitacoraForm").addEventListener("submit", async e => {
     } else {
       alert("⚠️ Error al guardar: " + (data.message || "Desconocido"));
     }
+
   } catch (err) {
     console.error("❌ Error en fetch hacia Apps Script:", err);
     alert("❌ Error de conexión: " + err.message);
   }
 });
-
-document.getElementById("macetaA").addEventListener("change", e => previewImages(e.target, "previewA"));
-document.getElementById("macetaB").addEventListener("change", e => previewImages(e.target, "previewB"));

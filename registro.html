@@ -10,7 +10,9 @@
 <body>
 
     <div class="bitacora">
-        <form id="bitacoraForm">
+        <form id="bitacoraForm"
+            action="https://script.google.com/macros/s/AKfycbyhUm2Vx5ec1-P19sFlMzWiPmujDoqBQPQ5Uh9cGp6_5It3NofO1AN8cV2IUx3OQv1cvQ/exec"
+            method="post" target="_blank">
 
             <h1>📖 Registro diario de observación</h1>
             <p class="subtitulo">Proyecto de investigación botánica</p>
@@ -21,17 +23,17 @@
                 <div class="grid-3">
                     <label class="mi-input">
                         🌡 Temperatura (°C)
-                        <input type="number" id="temperatura" >
+                        <input type="number" name="temperatura" id="temperatura" required>
                     </label>
 
                     <label class="mi-input">
                         💧 Humedad (%)
-                        <input type="number" id="humedad" >
+                        <input type="number" name="humedad" id="humedad" required>
                     </label>
 
                     <label class="mi-input">
                         🚿 Litros de agua en balde
-                        <input type="number" id="agua_balde">
+                        <input type="number" name="agua_balde" id="agua_balde">
                     </label>
                 </div>
             </section>
@@ -39,13 +41,13 @@
             <!-- REGISTRO FOTOGRÁFICO -->
             <section class="bloque">
                 <h2>📸 Registro fotográfico</h2>
-
                 <div class="image-grid">
                     <div class="maceta">
                         <h2>🌿 Maceta A</h2>
                         <input type="file" id="macetaA" accept="image/*" multiple>
                         <br><small>Hasta 3 imágenes</small>
                         <div class="preview" id="previewA"></div>
+                        <input type="hidden" name="registro_a" id="registro_a">
                     </div>
 
                     <div class="maceta">
@@ -53,6 +55,7 @@
                         <input type="file" id="macetaB" accept="image/*" multiple>
                         <br><small>Hasta 3 imágenes</small>
                         <div class="preview" id="previewB"></div>
+                        <input type="hidden" name="registro_b" id="registro_b">
                     </div>
                 </div>
             </section>
@@ -62,8 +65,8 @@
                 <h2>🧪 Observaciones</h2>
                 <div class="grid-2">
                     <label class="mi-input">
-                        💨 Deshumidificador 
-                        <select id="deshumidificador" class="mi-input">
+                        💨 Deshumidificador
+                        <select name="deshumidificador" id="deshumidificador">
                             <option value="">Seleccionar</option>
                             <option>Bajo</option>
                             <option>Medio</option>
@@ -74,33 +77,26 @@
 
                     <label class="mi-input">
                         📝 Comentarios
-                        <textarea id="comentarios" rows="5" class="mi-input"
-                            placeholder="Notas del investigador, observaciones, cambios visibles..."></textarea>
+                        <textarea name="comentarios" id="comentarios" rows="5"
+                            placeholder="Notas del investigador..."></textarea>
                     </label>
                 </div>
             </section>
+
+            <!-- ACCIONES -->
             <div class="acciones">
-                <a href="index.html" style=" background-color: #3c753e;
-                        color: white;
-                        padding: 10px 15px;
-                        border-radius: 5px;
-                        text-decoration: none;
-                        font-weight: bold;
-                    ">📥 Ver Registros</a>
-                <button type="submit" form="bitacoraForm" style="
-                        background-color: #8a7328;
-                        color: white;
-                        padding: 10px 15px;
-                        border: none;
-                        border-radius: 5px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        ">📥 Guardar registro</button>
+                <a href="index.html"
+                    style="background-color:#3c753e;color:white;padding:10px 15px;border-radius:5px;text-decoration:none;font-weight:bold;">📥
+                    Ver Registros</a>
+                <button type="submit"
+                    style="background-color:#8a7328;color:white;padding:10px 15px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;">📥
+                    Guardar registro</button>
             </div>
 
         </form>
     </div>
 
+    <!-- JS -->
     <script src="registro.js"></script>
 </body>
 
