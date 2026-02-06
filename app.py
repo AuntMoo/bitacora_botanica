@@ -5,7 +5,6 @@ from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2.service_account import Credentials
 from io import BytesIO
 
-# ---------------------------
 # CSS diario
 # ---------------------------
 st.markdown("""

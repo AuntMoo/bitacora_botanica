@@ -94,7 +94,12 @@ function render() {
         recordDiv.className = "registro";
 
         // FECHA
-        recordDiv.innerHTML = `<h3>📅 ${new Date(row.marca_temporal).toLocaleString("es-CL")}</h3>`;
+        recordDiv.innerHTML = `
+            <br>
+            <h3 class="titulo-bloque">
+                📅 ${new Date(row.marca_temporal).toLocaleString("es-CL")}
+            </h3>
+        `;
 
         // IMÁGENES
         const imageGrid = document.createElement("div");
@@ -103,7 +108,7 @@ function render() {
         ["registro_a", "registro_b"].forEach((campo, i) => {
             const macetaDiv = document.createElement("div");
             macetaDiv.className = "maceta";
-            macetaDiv.innerHTML = `<h4>🌿 Maceta ${i === 0 ? "A" : "B"}</h4>`;
+            macetaDiv.innerHTML = `<h2>🌿 Maceta ${i === 0 ? "A" : "B"}</h2>`;
 
             let fotos = [];
 
@@ -168,7 +173,7 @@ function render() {
             ${tempHtml} 
             ${humedadHtml} 
             <p>🚿 Agua disponible: ${row.agua_balde ?? "—"} Lt</p>
-            <em>${row.comentarios ? `<p>📝 ${row.comentarios}</p>` : ""}<em>
+            ${row.comentarios ? `<p>📝Comentarios adicionales: <em>${row.comentarios}</p>` : ""}<em>
         `;
         recordDiv.appendChild(infoDiv);
 

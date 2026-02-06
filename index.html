@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-
     <header class="header">
-        <h1>📘 Bitácora botánica</h1>
-
-        <div class="header-controls">
+        <h1>Bitácora botánica</h1>
+        <div style="text-align: right;">
             <select id="weekSelector"></select>
-            <a href="registro.html" class="btn-new">➕ Nuevo registro</a>
+            <a href="registro.html" class="btn">Nuevo registro</a>
         </div>
+
     </header>
 
     <main id="records">
         <!-- Aquí se renderiza todo desde app.js -->
     </main>
 
-    <footer class="footer">
-        <button id="prevBtn">⬅️ Anterior</button>
-        <button id="nextBtn">➡️ Siguiente</button>
+    <footer class="footer" align:"center">
+        <button id="prevBtn" class="btn">⬅️ Anterior</button>
+        <button id="nextBtn" class="btn">➡️ Siguiente</button>
     </footer>
 
     <script src="app.js"></script>
