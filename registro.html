@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <title>Bitácora Botánica</title>
     <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
+<div id="loadingOverlay" class="loading hidden">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p>Guardando registro botánico… 🌿</p>
+    <small>Subiendo imágenes, por favor espera</small>
+  </div>
+</div>
 
 <body>
 
@@ -40,13 +49,14 @@
                 <div class="image-grid">
                     <div class="maceta">
                         <h2>🌿 Maceta A</h2>
-                        <input type="file" id="macetaA" accept="image/*" multiple>
+                        <input type="file" id="macetaA" accept="image/*" capture="environment" multiple>
                         <div class="preview" id="previewA"></div>
                         <input type="hidden" name="registro_a" id="registro_a">
                     </div>
+                    <br>
                     <div class="maceta">
                         <h2>🌿 Maceta B</h2>
-                        <input type="file" id="macetaB" accept="image/*" multiple>
+                        <input type="file" id="macetaB" accept="image/*" capture="environment" multiple>
                         <div class="preview" id="previewB"></div>
                         <input type="hidden" name="registro_b" id="registro_b">
                     </div>
@@ -74,10 +84,13 @@
                     </label>
                 </div>
             </section>
-
+            
             <div class="acciones">
                 <a href="index.html" class="btn">📥 Ver Registros</a>
-                <button type="submit" class="btn">📥 Guardar registro</button>
+                <button type="submit" class="btn" id="submitBtn">
+                    📥 Guardar registro
+                </button>
+
             </div>
         </form>
 

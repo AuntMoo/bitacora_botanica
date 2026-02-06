@@ -1,4 +1,5 @@
 console.log("✅ registro.js cargado correctamente");
+let isSubmitting = false; // Evita doble click
 
 const selectedImages = {
     macetaA: [],
@@ -43,7 +44,6 @@ document.getElementById("macetaB").addEventListener("change", e => {
     previewImages(e.target, "previewB", "macetaB");
 });
 
-// ==============================
 // Configuración Cloudinary
 // ==============================
 const CLOUD_NAME = "dyqlyzbrm";
@@ -64,88 +64,106 @@ async function uploadToCloudinary(file, folder) {
     return data.secure_url;
 }
 
-// ==============================
 // Submit del formulario
 // ==============================
 document.getElementById("bitacoraForm").addEventListener("submit", async e => {
     e.preventDefault();
-    console.log("🚀 Formulario enviado");
 
-    // 📁 Archivos de cada maceta (máx 3 imágenes)
+    if (isSubmitting) return; // 🛑 doble submit
+    isSubmitting = true;
+
+    const submitBtn = document.getElementById("submitBtn");
+    const overlay = document.getElementById("loadingOverlay");
+
+    // ==============================
+    // Validaciones
+    // ==============================
     const filesA = selectedImages.macetaA;
     const filesB = selectedImages.macetaB;
 
-
-    // Validar máximo permitido
-    if (filesA.length > 3) {
-        alert("🌿 Maceta A: puedes subir hasta 3 imágenes");
+    if (filesA.length > 3 || filesB.length > 3) {
+        alert("📸 Máximo 3 imágenes por maceta");
+        isSubmitting = false;
         return;
     }
 
-    if (filesB.length > 3) {
-    alert("🌿 Maceta B: puedes subir hasta 3 imágenes");
-    return;
-    }
-    // Validaciones básicas
     const temperatura = document.getElementById("temperatura").value;
     const humedad = document.getElementById("humedad").value;
-    if (!temperatura || !humedad) {
-        alert("🌡 Por favor ingresa temperatura y humedad");
-        return;
-    }
-
     const deshumidificador = document.getElementById("deshumidificador").value;
     const agua_balde = document.getElementById("agua_balde").value;
     const comentarios = document.getElementById("comentarios").value;
 
-    // ==============================
-    // Subir imágenes a Cloudinary y guardar URLs
-    // ==============================
-    const urlsA = [];
-    const urlsB = [];
-    try {
-        for (const file of filesA) urlsA.push(await uploadToCloudinary(file, "macetas/A"));
-        for (const file of filesB) urlsB.push(await uploadToCloudinary(file, "macetas/B"));
-    } catch (err) {
-        alert("❌ Error al subir imágenes. Revisa la consola.");
+    if (!temperatura || !humedad || !agua_balde || !deshumidificador) {
+        alert("🌡 Por favor completa los datos antes de guardar");
+        isSubmitting = false;
         return;
     }
 
-    console.log("🌿 Maceta A URLs:", urlsA);
-    console.log("🌿 Maceta B URLs:", urlsB);
+    // ==============================
+    // UI: bloquear + loading
+    // ==============================
+    submitBtn.disabled = true;
+    submitBtn.textContent = "⏳ Guardando...";
+    overlay.classList.remove("hidden");
 
-    // ==============================
-    // Preparar FormData para enviar al Apps Script
-    // ==============================
-    const formData = new FormData();
-    formData.append("temperatura", temperatura);
-    formData.append("humedad", humedad);
-    formData.append("registro_a", urlsA.join(","));
-    formData.append("registro_b", urlsB.join(","));
-    formData.append("deshumidificador", deshumidificador);
-    formData.append("agua_balde", agua_balde);
-    formData.append("comentarios", comentarios);
-
-    // ==============================
-    // Endpoint Apps Script
-    // ==============================
-    const endpoint = "https://script.google.com/macros/s/AKfycbxpuYwujkNw0VaHn1qtlcyeH9YlS-NenQBIEfOJBm0dWRxLOT9hA9-rgPNeXjhChJ8bBw/exec"
     try {
+        // ==============================
+        // Subir imágenes
+        // ==============================
+        const urlsA = [];
+        const urlsB = [];
+
+        for (const file of filesA) {
+            urlsA.push(await uploadToCloudinary(file, "macetas/A"));
+        }
+
+        for (const file of filesB) {
+            urlsB.push(await uploadToCloudinary(file, "macetas/B"));
+        }
+
+        // ==============================
+        // Enviar a Apps Script
+        // ==============================
+        const formData = new FormData();
+        formData.append("temperatura", temperatura);
+        formData.append("humedad", humedad);
+        formData.append("registro_a", urlsA.join(","));
+        formData.append("registro_b", urlsB.join(","));
+        formData.append("deshumidificador", deshumidificador);
+        formData.append("agua_balde", agua_balde);
+        formData.append("comentarios", comentarios);
+
+        const endpoint = "https://script.google.com/macros/s/AKfycbxpuYwujkNw0VaHn1qtlcyeH9YlS-NenQBIEfOJBm0dWRxLOT9hA9-rgPNeXjhChJ8bBw/exec";
+
         const res = await fetch(endpoint, {
             method: "POST",
             body: formData
         });
 
-        const msg = await res.text(); // Apps Script responde con HtmlService
-        alert(msg); // ✅ Registro guardado correctamente!
-        
-        // Limpiar formulario y previews
+        const msg = await res.text(); // 👈 mensaje del Apps Script
+
+        // ==============================
+        // ✅ ÉXITO
+        // ==============================
+        overlay.classList.add("hidden");
+        alert("✅ Registro guardado correctamente 🌿");
+
         e.target.reset();
+        selectedImages.macetaA = [];
+        selectedImages.macetaB = [];
         document.getElementById("previewA").innerHTML = "";
         document.getElementById("previewB").innerHTML = "";
 
     } catch (err) {
-        console.error("❌ Error en fetch:", err);
-        alert("❌ Error de conexión: " + err.message);
+        console.error(err);
+        overlay.classList.add("hidden");
+        alert("❌ Error al guardar el registro");
+    } finally {
+        // ==============================
+        // Restaurar UI SIEMPRE
+        // ==============================
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "📥 Guardar registro";
     }
 });
