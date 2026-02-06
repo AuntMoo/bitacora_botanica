@@ -1,4 +1,3 @@
-// ==============================
 // CONFIGURACIÓN
 // ==============================
 const SHEET_URL =
@@ -13,7 +12,6 @@ let currentPage = 0;
 
 const PAGE_SIZE = 7;
 
-// ==============================
 // RENDER IMÁGENES (GitHub + Cloudinary)
 // ==============================
 function renderImages(container, urlString) {
@@ -36,7 +34,6 @@ function renderImages(container, urlString) {
     });
 }
 
-// ==============================
 // CSV PARSER
 // ==============================
 function parseCSV(text) {
@@ -63,7 +60,6 @@ function parseCSV(text) {
     return rows;
 }
 
-// ==============================
 // FECHA
 // ==============================
 function parseDate(value) {
@@ -83,7 +79,6 @@ function parseDate(value) {
 // ==============================
 function render() {
     recordsEl.innerHTML = "";
-
     const start = currentPage * PAGE_SIZE;
     const page = filteredData.slice(start, start + PAGE_SIZE);
 
@@ -165,7 +160,6 @@ function render() {
             humedadHtml = `<p style="color: red; " title="La humedad supera el máximo recomendado 65%">💧  Humedad: ${row.humedad} °C</p>`;
         }
 
-
         // INFO
         const infoDiv = document.createElement("div");
         infoDiv.className = "parametros";
@@ -176,13 +170,10 @@ function render() {
             ${row.comentarios ? `<p>📝Comentarios adicionales: <em>${row.comentarios}</p>` : ""}<em>
         `;
         recordDiv.appendChild(infoDiv);
-
         recordsEl.appendChild(recordDiv);
     });
 }
 
-
-// ==============================
 // SEMANAS
 // ==============================
 function buildWeeks() {
@@ -224,8 +215,6 @@ function filterWeek(weekStart) {
 
     render();
 }
-
-// ==============================
 // CARGA DE DATOS
 // ==============================
 async function loadData() {
@@ -254,8 +243,6 @@ async function loadData() {
         recordsEl.innerHTML = "<p style='color:red'>Error al cargar datos</p>";
     }
 }
-
-// ==============================
 // BOTONES
 // ==============================
 document.getElementById("prevBtn").onclick = () => {
@@ -272,7 +259,6 @@ document.getElementById("nextBtn").onclick = () => {
     }
 };
 
-// ==============================
 // INIT
 // ==============================
 loadData();

@@ -7,26 +7,28 @@ body {
     background-color: #f9f4ef;
     color: #3f3a34;
 }
+
 /* ===============================
    CONTENEDOR PRINCIPAL
 ================================ */
 .bitacora {
     max-width: 900px;
-    margin: 40px auto;
-    padding: 32px;
+    margin: auto;
+    padding: 16px;
     background: #f6f2e8;
     border: 1px solid #e0d6c8;
     border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
 }
 
 /* ===============================
    BLOQUES
 ================================ */
 .bloque {
-    margin-bottom: 30px;
-    padding-bottom: 22px;
-    border-bottom: 1px dashed #d8cfc4;
+    background: #fff;
+    padding: 16px;
+    border-radius: 14px;
+    margin-bottom: 20px;
 }
 
 .titulo-bloque {
@@ -39,16 +41,36 @@ body {
 /* ===============================
    GRIDS
 ================================ */
-.grid-3 {
+.grid-3,
+.grid-2,
+.image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 14px;
 }
 
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 16px;
+/* Desktop */
+@media (min-width: 768px) {
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .grid-3,
+    .grid-2,
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ===============================
@@ -60,23 +82,32 @@ label {
     font-size: 14px;
     gap: 6px;
 }
+/*CSS selecciona etiquetas o clases, no “tipos lógicos”
+.input ≠ <input>
+Usa .mi-input input para especificar los inputs*/
 
-input,
-select,
-textarea {
-    padding: 9px 10px;
-    border-radius: 8px;
-    border: 1px solid #c8bfb3;
-    font-family: 'Georgia', serif;
-    background-color: #fdfbf7;
+.mi-input input,
+.mi-input select,
+.mi-input textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; /* evita zoom en móvil */
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+.mi-input input:focus,
+.mi-input select:focus,
+.mi-input textarea:focus {
+    outline: none;
+    border-color: #4f7c5c;
+    box-shadow: 0 0 0 3px rgba(79, 124, 92, 0.2);
 }
 
-textarea {
-    resize: vertical;
-}
 
 input[type="file"] {
-    border: none;
+    border: 10px;
     padding: 0;
 }
 
@@ -96,7 +127,7 @@ input[type="file"] {
     border-radius: 12px;
     padding: 14px;
     text-align: center;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.6);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
 }
 
 .maceta h2,
@@ -117,35 +148,35 @@ input[type="file"] {
     object-fit: cover;
     border-radius: 20px;
     border: 1px solid #d4ccc0;
-    box-shadow: 0 3px 6px rgba(0,0,0,.12);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .12);
 }
+
 .preview {
     display: flex;
-    gap: 50px;
-    margin-top: 10px;
+    gap: 8px;
     flex-wrap: wrap;
-    justify-content: center;
 }
+
 .preview img {
     width: 90px;
     height: 90px;
-    border-radius: 10px;
+    object-fit: cover;
+    border-radius: 12px;
 }
+
 
 /* ===============================
    REGISTROS
 ================================ */
 .registro {
     background:
-        linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.4),
-            rgba(255,255,255,0.15)
-        ),
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.15)),
         #f7f8f0;
     box-shadow:
-        0 4px 10px rgba(0,0,0,.08),
-        inset 0 0 30px rgba(255,255,255,.4);
+        0 4px 10px rgba(0, 0, 0, .08),
+        inset 0 0 30px rgba(255, 255, 255, .4);
 }
 
 .registro h3 {
@@ -171,26 +202,22 @@ input[type="file"] {
    BOTONES
 ================================ */
 .acciones {
-    margin-top: 28px;
-    border-radius: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.btn,
-button {
-    background-color: #a57c5f;
-    color: #fff;
-    border: none;
-    padding: 10px 26px;
-    border-radius: 20px;
-    font-size: 15px;
-    cursor: pointer;
-    font-family: 'Georgia', serif;
-    transition: background .2s ease;
-}
-
-.btn:hover,
-button:hover {
-    background-color: #8e634c;
+.btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: #4f7c5c;
+  color: white;
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
 }
 
 /* ===============================
@@ -201,6 +228,7 @@ button:hover {
     color: #8a8379;
     font-size: 14px;
 }
+
 /* ===============================
    TEXTURA PAPEL SUAVE
 ================================ */
@@ -209,25 +237,24 @@ button:hover {
 body {
     background-color: #f9f4ef;
     background-image:
-        linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 4px 4px;
 }
 
 /* Hoja principal (bitácora) */
 .bitacora {
     background:
-        linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.35),
-            rgba(255,255,255,0.15)
-        ),
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.15)),
         #f6f2e8;
 
     box-shadow:
-        0 6px 18px rgba(0,0,0,.08),
-        inset 0 0 60px rgba(255,255,255,.35);
+        0 6px 18px rgba(0, 0, 0, .08),
+        inset 0 0 60px rgba(255, 255, 255, .35);
 }
+
 .btn,
 button {
     display: inline-flex;
@@ -237,8 +264,10 @@ button {
     padding: 8px 18px;
     border-radius: 20px;
 
-    background-color: #f6f2e8;      /* papel claro */
-    color: #4f6b4a;                 /* verde botánico */
+    background-color: #f6f2e8;
+    /* papel claro */
+    color: #4f6b4a;
+    /* verde botánico */
 
     font-family: 'Georgia', serif;
     font-size: 14px;
@@ -247,17 +276,19 @@ button {
 
     border: 1px solid #cfc6b8;
     box-shadow:
-        inset 0 0 6px rgba(255,255,255,.6),
-        0 2px 4px rgba(0,0,0,.1);
+        inset 0 0 6px rgba(255, 255, 255, .6),
+        0 2px 4px rgba(0, 0, 0, .1);
 
     transition: all .2s ease;
 }
+
 h1 {
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 32px;
     font-weight: bold;
 
-    color: #4f6b4a; /* verde botánico */
+    color: #4f6b4a;
+    /* verde botánico */
 
     letter-spacing: 1px;
     margin-bottom: 20px;
@@ -266,3 +297,49 @@ h1 {
     text-align: center;
 }
 
+.loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(244, 246, 243, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.loading-box {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  text-align: center;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #cddfd3;
+  border-top: 4px solid #4f7c5c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.mi-select {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background: white;
+  box-sizing: border-box;
+}
